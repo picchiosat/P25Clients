@@ -35,6 +35,7 @@ public:
   std::string  getRptAddress() const;
   unsigned int getRptPort() const;
   unsigned int getMyPort() const;
+  bool         getDebug() const;
   bool         getDaemon() const;
 
   // The Id Lookup section
@@ -51,6 +52,7 @@ public:
   unsigned int getLogFileLevel() const;
   std::string  getLogFilePath() const;
   std::string  getLogFileRoot() const;
+  bool         getLogFileRotate() const;
 
   // The Network section
   unsigned int getNetworkPort() const;
@@ -61,8 +63,9 @@ public:
   unsigned int getNetworkParrotPort() const;
   std::string  getNetworkP252DMRAddress() const;
   unsigned int getNetworkP252DMRPort() const;
-  unsigned int getNetworkStartup() const;
-  unsigned int getNetworkInactivityTimeout() const;
+  std::vector<unsigned int> getNetworkStatic() const;
+  unsigned int getNetworkRFHangTime() const;
+  unsigned int getNetworkNetHangTime() const;
   bool         getNetworkDebug() const;
 
   // The Remote Commands section
@@ -75,6 +78,7 @@ private:
   std::string  m_rptAddress;
   unsigned int m_rptPort;
   unsigned int m_myPort;
+  bool         m_debug;
   bool         m_daemon;
 
   std::string  m_lookupName;
@@ -88,6 +92,7 @@ private:
   unsigned int m_logFileLevel;
   std::string  m_logFilePath;
   std::string  m_logFileRoot;
+  bool         m_logFileRotate;
 
   unsigned int m_networkPort;
   std::string  m_networkHosts1;
@@ -97,8 +102,9 @@ private:
   unsigned int m_networkParrotPort;
   std::string  m_networkP252DMRAddress;
   unsigned int m_networkP252DMRPort;
-  unsigned int m_networkStartup;
-  unsigned int m_networkInactivityTimeout;
+  std::vector<unsigned int> m_networkStatic;;
+  unsigned int m_networkRFHangTime;
+  unsigned int m_networkNetHangTime;
   bool         m_networkDebug;
 
   bool         m_remoteCommandsEnabled;

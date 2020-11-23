@@ -16,30 +16,39 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#ifndef	Network_H
-#define	Network_H
+#ifndef	RptNetwork_H
+#define	RptNetwork_H
 
 #include "UDPSocket.h"
+#include "Timer.h"
 
 #include <cstdint>
 #include <string>
 
-class CNetwork {
+class CRptNetwork {
 public:
-	CNetwork(unsigned int port, bool debug);
-	~CNetwork();
+	CRptNetwork(unsigned int myPort, const sockaddr_storage& rptAddr, unsigned int rptAddrLen, const std::string& callsign, bool debug);
+	~CRptNetwork();
 
 	bool open();
 
-	bool writeData(const unsigned char* data, unsigned int length, const sockaddr_storage& addr, unsigned int addrLen);
+	bool write(const unsigned char* data, unsigned int length);
 
-	unsigned int readData(unsigned char* data, unsigned int length, sockaddr_storage& addr, unsigned int& addrLen);
+	unsigned int read(unsigned char* data, unsigned int length);
+
+	void clock(unsigned int ms);
 
 	void close();
 
 private:
-	CUDPSocket m_socket;
-	bool       m_debug;
+	sockaddr_storage m_rptAddr;
+	unsigned int     m_rptAddrLen;
+	std::string      m_callsign;
+	CUDPSocket       m_socket;
+	bool             m_debug;
+	CTimer           m_timer;
+
+	bool writePoll();
 };
 
 #endif

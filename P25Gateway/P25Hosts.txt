@@ -12,6 +12,9 @@
 # HELLAS Zone P25 TG202
 202 hellaszone.com 41000
 
+# 204 Technology First
+204 203.129.17.27 41000
+
 # 214 SPAIN P25 Reflector
 214 214p25.xreflector.es 41000
 
@@ -36,8 +39,14 @@
 # 927 Southern California
 927	927.org			41000
 
+# KM4NNO AllStarLink DIU 3000 (Bridged to the P25Link Network).
+2050	reflector.p25.link		41009
+
 # 2140 P25 Reflector BM DMR+ Multi 
-2140	94.177.235.81		41000
+2140	164.132.96.157	41000
+
+# 2231 IT Sardinia Is. - Multimode - https://is0.org
+2231	p25.is0.org			41000
 
 # 2263 Bucharest YO3 P25 Network
 2263	p25.dstar-yo.ro	41000
@@ -51,7 +60,10 @@
 # 3142 Pennsylvania
 3142 3.215.215.169 41002
 
-# 5057 VK7 TAS 
+# 4095 KM4NNO Wave (Bridged to the P25Link Network).
+4095	reflector.p25.link		41010
+
+# 5057 VK7 TAS (hosted by VK7HSE)
 5057	45.248.50.37		41000
 
 # 6935 Indiana Digital Ham Radio P25 Reflector
@@ -60,17 +72,26 @@
 # 7225 MULTIPROTOCOLO ARGENTINA
 7225  ysfarg.ddns.net 41000
 
+# 8208 China P25 Network bridge to P25NX
+8208 47.105.33.47 41000
+
+# 9846 P25 Portal to WW8GM YSF network www.gmarc.org 
+9846	p25.dudetronics.com	41001
+
 # 10100 World Wide	http://www.george-smart.co.uk/p25/
 10100	m1geo.com		41000
 
-# 10101 World Wide TAC 1 (Bridged to the P25NX Network).
-10101	44.98.254.131		41000
+# 10101 World Wide TAC 1 (Bridged to the P25Link Network).
+10101	reflector.p25.link		41000
 
-# 10102 World Wide TAC 2 (Bridged to the P25NX Network).
-10102	44.98.254.131		41001
+# 10102 World Wide TAC 2 (Bridged to the P25Link Network).
+10102	reflector.p25.link		41001
 
-# 10103 World Wide TAC 3 (Bridged to the P25NX Network).
-10103	44.98.254.131		41002
+# 10103 World Wide TAC 3 (Bridged to the P25Link Network).
+10103	reflector.p25.link		41002
+
+# 10120 CQ-UK
+10120	81.150.10.62	41000
 
 # 10200 North America
 10200	dvswitch.org		41000
@@ -78,11 +99,11 @@
 # 10201 North America TAC 1
 10201	dvswitch.org		41010
 
-# 10202 North America TAC 2 (Bridged to the P25NX Network).
-10202	44.98.254.131		41003
+# 10202 North America TAC 2 (Bridged to the P25Link Network).
+10202	reflector.p25.link		41003
 
-# 10203 North America TAC 3 (Bridged to the P25NX Network).
-10203	44.98.254.131		41004
+# 10203 North America TAC 3 (Bridged to the P25Link Network).
+10203	reflector.p25.link		41004
 
 # P25 France
 10208 m55.evxonline.net 41000
@@ -102,11 +123,11 @@
 # 10301	Europe TAC 1
 10301	ea5gvk.duckdns.org	41000
 
-# 10302 Europe TAC 2 (Bridged to the P25NX Network).
-10302	44.98.254.131		41005
+# 10302 Europe TAC 2 (Bridged to the P25Link Network).
+10302	reflector.p25.link		41005
 
-# 10303 Europe TAC 3 (Bridged to the P25NX Network).
-10303	44.98.254.131		41006
+# 10303 Europe TAC 3 (Bridged to the P25Link Network).
+10303	reflector.p25.link		41006
 
 # 10310 Germany HAMNET (Bridge to 10320)	http://44.148.230.100/
 10310	44.148.230.100		41000
@@ -149,6 +170,9 @@
 
 # 10421 DL-Nordwest (dl-nordwest.com) by 9V1LH/DG1BGS and DK5BS
 10421 9v1lh.spdns.org 41000
+
+# 10444 VK64 P25 Group
+10444 vk64.chiffers.com 41000
 
 # 10700 Australia NSW Bridge to AU NSW YSF
 10700	p25nsw.gustotech.net	41000
@@ -247,7 +271,10 @@
 31426 3.215.215.169 41001
 
 # 31444	RI DIGITAL LINK TG#31444
-31444	149.28.54.153	41000
+31444 149.28.54.153	41000
+
+# 31555 SE Wisconsin Regional Linked to WiDMR 31555
+31555 mmdvm-p25.v24bridge.net 41000
 
 # 31620 Kings of Digital
 31620 wb5ekup25.duckdns.org 41000
@@ -257,6 +284,9 @@
 
 # 31672 P25 Pi-Star chat
 31672	p25-31672.pistar.uk	41000
+
+# 31769 P25 MB6NG
+31769	reflector.mb6ng.uk	41000
 
 # 31691 US Midwest P25 Reflector
 31691 net.w3axl.com 43169
@@ -278,6 +308,9 @@
 
 # 40721 Fusion Canada Fr
 40721	38.110.97.161		41000
+
+# 43389 SouthEast Link US
+43389	selink.lmarc.net		41000
 
 # 50210 Bridge to BM TG50210/XLX/YSF/WiresX Malaysia-Net
 50210   edone.now.im            41000

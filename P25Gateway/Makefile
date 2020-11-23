@@ -1,10 +1,10 @@
-CC      = gcc
-CXX     = g++
-CFLAGS  = -g -O3 -Wall -std=c++0x -pthread
+CC      = cc
+CXX     = c++
+CFLAGS  = -g -O3 -Wall -DHAVE_LOG_H -DUDP_SOCKET_MAX=2 -std=c++0x -pthread
 LIBS    = -lpthread
 LDFLAGS = -g
 
-OBJECTS = Conf.o DMRLookup.o Log.o Mutex.o Network.o P25Gateway.o Reflectors.o StopWatch.o Thread.o Timer.o UDPSocket.o Utils.o Voice.o
+OBJECTS = Conf.o DMRLookup.o Log.o Mutex.o P25Gateway.o P25Network.o Reflectors.o RptNetwork.o StopWatch.o Thread.o Timer.o UDPSocket.o Utils.o Voice.o
 
 all:		P25Gateway
 

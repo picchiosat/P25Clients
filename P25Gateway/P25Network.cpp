@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2009-2014,2016 by Jonathan Naylor G4KLX
+ *   Copyright (C) 2009-2014,2016,2020 by Jonathan Naylor G4KLX
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include "Network.h"
+#include "P25Network.h"
 #include "Utils.h"
 #include "Log.h"
 
@@ -24,41 +24,50 @@
 #include <cassert>
 #include <cstring>
 
-CNetwork::CNetwork(unsigned int port, const std::string& callsign, bool debug) :
+CP25Network::CP25Network(unsigned int port, const std::string& callsign, bool debug) :
 m_callsign(callsign),
-m_socket(port),
+m_socket(),
+m_port(port),
 m_debug(debug)
 {
+	assert(port > 0U);
+
 	m_callsign.resize(10U, ' ');
 }
 
-CNetwork::~CNetwork()
+CP25Network::~CP25Network()
 {
 }
 
-bool CNetwork::open()
+bool CP25Network::open()
 {
 	LogInfo("Opening P25 network connection");
 
-	return m_socket.open();
+	unsigned int index = 0U;
+
+	bool ret1 = m_socket.open(index, PF_INET, "", m_port);
+	if (ret1)
+		index++;
+
+	bool ret2 = m_socket.open(index, PF_INET6, "", m_port);
+
+	// We're OK as long as we have either IPv4 or IPv6 or both.
+	return ret1 || ret2;
 }
 
-bool CNetwork::writeData(const unsigned char* data, unsigned int length, const in_addr& address, unsigned int port)
+bool CP25Network::write(const unsigned char* data, unsigned int length, const sockaddr_storage& addr, unsigned int addrLen)
 {
 	assert(data != NULL);
 	assert(length > 0U);
-	assert(port > 0U);
 
 	if (m_debug)
 		CUtils::dump(1U, "P25 Network Data Sent", data, length);
 
-	return m_socket.write(data, length, address, port);
+	return m_socket.write(data, length, addr, addrLen);
 }
 
-bool CNetwork::writePoll(const in_addr& address, unsigned int port)
+bool CP25Network::poll(const sockaddr_storage& addr, unsigned int addrLen)
 {
-	assert(port > 0U);
-
 	unsigned char data[15U];
 
 	data[0U] = 0xF0U;
@@ -69,13 +78,11 @@ bool CNetwork::writePoll(const in_addr& address, unsigned int port)
 	if (m_debug)
 		CUtils::dump(1U, "P25 Network Poll Sent", data, 11U);
 
-	return m_socket.write(data, 11U, address, port);
+	return m_socket.write(data, 11U, addr, addrLen);
 }
 
-bool CNetwork::writeUnlink(const in_addr& address, unsigned int port)
+bool CP25Network::unlink(const sockaddr_storage& addr, unsigned int addrLen)
 {
-	assert(port > 0U);
-
 	unsigned char data[15U];
 
 	data[0U] = 0xF1U;
@@ -86,15 +93,15 @@ bool CNetwork::writeUnlink(const in_addr& address, unsigned int port)
 	if (m_debug)
 		CUtils::dump(1U, "P25 Network Unlink Sent", data, 11U);
 
-	return m_socket.write(data, 11U, address, port);
+	return m_socket.write(data, 11U, addr, addrLen);
 }
 
-unsigned int CNetwork::readData(unsigned char* data, unsigned int length, in_addr& address, unsigned int& port)
+unsigned int CP25Network::read(unsigned char* data, unsigned int length, sockaddr_storage& addr, unsigned int& addrLen)
 {
 	assert(data != NULL);
 	assert(length > 0U);
 
-	int len = m_socket.read(data, length, address, port);
+	int len = m_socket.read(data, length, addr, addrLen);
 	if (len <= 0)
 		return 0U;
 
@@ -104,7 +111,7 @@ unsigned int CNetwork::readData(unsigned char* data, unsigned int length, in_add
 	return len;
 }
 
-void CNetwork::close()
+void CP25Network::close()
 {
 	m_socket.close();
 

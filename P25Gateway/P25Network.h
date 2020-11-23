@@ -1,5 +1,5 @@
 /*
- *   Copyright (C) 2009-2014,2016 by Jonathan Naylor G4KLX
+ *   Copyright (C) 2009-2014,2016,2020 by Jonathan Naylor G4KLX
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -16,34 +16,35 @@
  *   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#ifndef	Network_H
-#define	Network_H
+#ifndef	P25Network_H
+#define	P25Network_H
 
 #include "UDPSocket.h"
 
 #include <cstdint>
 #include <string>
 
-class CNetwork {
+class CP25Network {
 public:
-	CNetwork(unsigned int port, const std::string& callsign, bool debug);
-	~CNetwork();
+	CP25Network(unsigned int port, const std::string& callsign, bool debug);
+	~CP25Network();
 
 	bool open();
 
-	bool writeData(const unsigned char* data, unsigned int length, const in_addr& address, unsigned int port);
+	bool write(const unsigned char* data, unsigned int length, const sockaddr_storage& addr, unsigned int addrLen);
 
-	unsigned int readData(unsigned char* data, unsigned int length, in_addr& address, unsigned int& port);
+	unsigned int read(unsigned char* data, unsigned int length, sockaddr_storage& addr, unsigned int& addrLen);
 
-	bool writePoll(const in_addr& address, unsigned int port);
+	bool poll(const sockaddr_storage& addr, unsigned int addrLen);
 
-	bool writeUnlink(const in_addr& address, unsigned int port);
+	bool unlink(const sockaddr_storage& addr, unsigned int addrLen);
 
 	void close();
 
 private:
 	std::string  m_callsign;
 	CUDPSocket   m_socket;
+	unsigned int m_port;
 	bool         m_debug;
 };
 
